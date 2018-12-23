@@ -86,10 +86,7 @@ class taskset():
         next_day = next_time.date().day
         try:
             #根据下次运行的时间,计算出秒数
-            try:
-                next_time = datetime.datetime.strptime(f'{next_year}-{next_month}-{next_day} {data["hour"]}:{data["mint"]}:{data["senc"]}', "%Y-%m-%d %H:%M:%S")
-            except:
-                next_time = datetime.datetime.strptime('%s-%s-%s %s:%s:%s' %(next_year,next_month,next_day,data["hour"],data["mint"],data["senc"]), "%Y-%m-%d %H:%M:%S")
+            next_time = datetime.datetime.strptime('%s-%s-%s %s:%s:%s' %(next_year,next_month,next_day,data["hour"],data["mint"],data["senc"]), "%Y-%m-%d %H:%M:%S")
             timer_start_time = (next_time - now_time).total_seconds()
         except :
             raise ValueError('请检查时间格式!')
