@@ -26,7 +26,7 @@ class taskset():
         if data not in self.taskList:
             return True
         self.taskList.remove(data)
-        subprocess.Popen(data['value'])
+        subprocess.Popen(data['value'],shell=True)
         interval = self.GetNextTaskSenc(data)
         data['nextRunTime'] = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()+int(interval)))
         self.taskList.append(data)
@@ -86,7 +86,10 @@ class taskset():
         next_day = next_time.date().day
         try:
             #根据下次运行的时间,计算出秒数
-            next_time = datetime.datetime.strptime(f'{next_year}-{next_month}-{next_day} {data["hour"]}:{data["mint"]}:{data["senc"]}', "%Y-%m-%d %H:%M:%S")
+            try:
+                next_time = datetime.datetime.strptime(f'{next_year}-{next_month}-{next_day} {data["hour"]}:{data["mint"]}:{data["senc"]}', "%Y-%m-%d %H:%M:%S")
+            except:
+                next_time = datetime.datetime.strptime('%s-%s-%s %s:%s:%s' %(next_year,next_month,next_day,data["hour"],data["mint"],data["senc"]), "%Y-%m-%d %H:%M:%S")
             timer_start_time = (next_time - now_time).total_seconds()
         except :
             raise ValueError('请检查时间格式!')

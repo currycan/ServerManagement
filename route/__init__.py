@@ -6,3 +6,4 @@ from .webssh import *
 from .login import *
 from .plugins import *
 from .controlPanel import *
+from .linkButton import *

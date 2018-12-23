@@ -45,5 +45,4 @@ class writeResTask(object):
             }
             sql.insertInfo(info = realTimeInfo)
             sql.deleteInfo(day=self.saveDay)
-            print(realTimeInfo)
             

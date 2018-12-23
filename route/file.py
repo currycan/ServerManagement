@@ -251,7 +251,7 @@ def picVisit():
     #因为图片展示页面的div大小为800*800，所以根据图片高、宽等比例缩小
     h_pic=img.size[0]/800 
     w_pic=img.size[1]/800
-    size=(int(img.size[0]/h_pic),int(img.size[1]/h_pic) if h_pic>=w_pic else int(img.size[0]/w_pic),int(img.size[1]/w_pic))
+    size=((int(img.size[0]/h_pic),int(img.size[1]/h_pic)) if h_pic>=w_pic else (int(img.size[0]/w_pic),int(img.size[1]/w_pic)))
     img = img.resize(size, Image.ANTIALIAS)
     name = os.path.join('temp',os.path.split(fileName)[1])
     img.save(name)

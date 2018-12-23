@@ -2,6 +2,7 @@ import sqlite3
 import os
 import time,json
 import datetime
+import random
 class sqlClass(object):
     def __new__(cls):
         if not hasattr(cls,'instance'):
@@ -35,6 +36,14 @@ class sqlClass(object):
             self.con.execute('''CREATE TABLE TaskList 
                 (INFO    TEXT,
                 TASKID    TEXT
+                );''')
+            self.con.execute('''CREATE TABLE LinkButton
+                (BTID           TEXT,
+                BUTTONNAME      TEXT,
+                TYPE            TEXT,
+                TIM             TEXT,
+                NOTE            TEXT,
+                SHELL           TEXT
                 );''')
     def getTime(self):
         return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
@@ -107,10 +116,42 @@ class sqlClass(object):
             resultData = self.con.execute('SELECT * FROM TaskList').fetchall()
             result = [True,resultData]
         except Exception as e:
-            print('!!!!!!!',e)
             result = [False,str(e)]
         return result
     #删除任务
     def deleteTask(self,taskID):
         self.con.execute('DELETE FROM TaskList WHERE TASKID = (?)',(taskID,))
+        self.con.commit()
+        #----------------------快捷方式--------------------
+    #创建一个快捷按钮
+    def createLinkButton(self,LinkButtonDict):
+        try:
+            BTID = str(random.random()+time.time())
+            BUTTONNAME =LinkButtonDict['BUTTONNAME']
+            TYPE = LinkButtonDict['TYPE']
+            TIM = self.getTime()
+            NOTE = LinkButtonDict['NOTE']
+            SHELL = LinkButtonDict['SHELL']
+            self.con.execute('INSERT INTO LinkButton (BTID,BUTTONNAME,TYPE,TIM,NOTE,SHELL) VALUES (?,?,?,?,?,?)',(BTID,BUTTONNAME,TYPE,TIM,NOTE,SHELL))
+            self.con.commit()
+            return [True]
+        except Exception as e:
+            return [False,e]
+    #查询全部按钮数据
+    def selectLinkButton(self):
+        return self.con.execute('SELECT * FROM LinkButton').fetchall()
+    #按照BTID号查询shell
+    def selectShellForLinkButton(self,BTID):
+        return self.con.execute('SELECT SHELL FROM LinkButton WHERE BTID=?',(BTID,)).fetchall()
+    #更新shell
+    def updateLinkButton(self,BTID,SHELL):
+        try:
+            self.con.execute('UPDATE LinkButton set SHELL=? WHERE BTID=?',(SHELL,BTID))
+            self.con.commit()
+            return [True]
+        except Exception as e:
+            return [False,e]
+    #删除按钮
+    def deleteLinkButton(self,BTID):
+        self.con.execute('DELETE FROM LinkButton WHERE BTID=?',(BTID,))
         self.con.commit()
