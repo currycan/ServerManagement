@@ -40,7 +40,7 @@ def getShell():
 @cklogin()
 def CreateLinkButton():
     LinkButtonDict = {
-        'BUTTONNAME' : request.values.get('BUTTONNAME','按钮')[:5].ljust(5,'`').replace('`','&#8195;'),
+        'BUTTONNAME' : request.values.get('BUTTONNAME','按钮')[:6].ljust(6,'`').replace('`','&#8195;'),
         'TYPE' : request.values.get('TYPE'),
         'NOTE' : request.values.get('NOTE'),
         'SHELL' : request.values.get('SHELL')
