@@ -93,4 +93,4 @@ class taskset():
             timer_start_time = (next_time - now_time).total_seconds()
         except :
             raise ValueError('请检查时间格式!')
-        return (int(timer_start_time)+1 if (timer_start_time//1 > 0) else int(timer_start_time)) #向上取整,只有这一个需求,懒得用math.ceil
+        return (int(timer_start_time)+1 if (timer_start_time%1 > 0) else int(timer_start_time)) #向上取整,只有这一个需求,懒得用math.ceil
