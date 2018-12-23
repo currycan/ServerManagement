@@ -11,7 +11,7 @@
             就可以执行你预设好的shell命令
           </blockquote>
           <fieldset class="layui-elem-field layui-field-title">
-            <legend><button class="layui-btn layui-btn-normal" style="font-size: 15px;height:30px" onclick="createButton()">新增按钮</button></legend>
+            <legend><button class='layui-btn layui-btn-normal layui-btn-mini'  onclick="createButton()">新增按钮</button></legend>
           </fieldset>
           <table class="layui-table" lay-even="" lay-skin="row" style="margin-left: 45px">
           <colgroup>
@@ -60,7 +60,7 @@
                   strVar += "                <div class=\"layui-form-item layui-form-text\">\n";
                   strVar += "                    <label class=\"layui-form-label\">按钮名称<\/label>\n";
                   strVar += "                    <div class=\"layui-input-inline\">\n";
-                  strVar += "                        <input type=\"text\" placeholder=\"最多5个字哦\" name=\"BUTTONNAME\" autocomplete=\"off\" class=\"layui-input\" >\n";
+                  strVar += "                        <input type=\"text\" placeholder=\"最多6个字哦\" name=\"BUTTONNAME\" autocomplete=\"off\" class=\"layui-input\" >\n";
                   strVar += "                    <\/div>\n";
                   strVar += "                <\/div>\n";
                   strVar += "                <div class=\"layui-form-item layui-form-text\">\n";
@@ -127,7 +127,7 @@
                             linkButtonList=jQuery.parseJSON(data).result.reverse()
                             $.each(linkButtonList, function (i, item) {
                               ht+='<tr>'
-                              ht+='<td><button class="layui-btn" id = '+ item[0] +' onclick="clickLinkButton()" style="width:100px">'+item[1]+'</button></td>'
+                              ht+='<td><button class="layui-btn layui-btn-small" id = '+ item[0] +' onclick="clickLinkButton()" style="width:100px">'+item[1]+'</button></td>'
                               ht+='<td>'+item[2]+'</td>'
                               ht+='<td>'+item[3]+'</td>'
                               ht+='<td>'+item[4]+'</td>'
